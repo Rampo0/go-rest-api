@@ -3,6 +3,7 @@ package users
 import (
 	"fmt"
 	"multi-lang-microservice/users/src/datasources/mysql/users_db"
+	"multi-lang-microservice/users/src/logger"
 	"multi-lang-microservice/users/src/utils/errors"
 	"multi-lang-microservice/users/src/utils/mysql_utils"
 )
@@ -52,14 +53,16 @@ func (user *User) Get() *errors.RestErr {
 
 	stmt, err := users_db.Client.Prepare(queryGetUser)
 	if err != nil {
-		return errors.NewInternalServerError(err.Error())
+		logger.Error("error when trying to prepare get user statement", err)
+		return errors.NewInternalServerError("database error")
 	}
 	defer stmt.Close()
 
 	result := stmt.QueryRow(user.ID)
 
 	if err := result.Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status); err != nil {
-		return mysql_utils.ParseError(err)
+		logger.Error("error when trying to get user by id", err)
+		return errors.NewInternalServerError("database error")
 	}
 
 	return nil
