@@ -1,8 +1,9 @@
 package users
 
 import (
-	"multi-lang-microservice/users/src/utils/errors"
 	"strings"
+
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/errors"
 )
 
 const (

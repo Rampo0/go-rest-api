@@ -9,30 +9,24 @@ services:
       - ../infra/mariadb/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ilovedocker
-    networks:
-      - users_net
-
+    
   app:
     build: 
       context: .
     volumes: 
-      - ./:/go/src/multi-lang-microservice/users
+      - ./:/go/src/github.com/rampo0/multi-lang-microservice/users
     image: rampooco/users
     container_name: multi-users
     restart: on-failure
     ports:
       - 8080:8080
-    networks:
-      - users_net
+    depends_on: 
+      - mariadb
 
   adminer:
     image: adminer
     container_name: users_adminer
     ports: 
       - "4001:8080"
-    networks: 
-      - users_net
-
-networks:
-  users_net:
-    driver: bridge
+    depends_on: 
+      - mariadb

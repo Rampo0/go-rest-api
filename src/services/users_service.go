@@ -1,10 +1,10 @@
 package services
 
 import (
-	"multi-lang-microservice/users/src/domain/users"
-	"multi-lang-microservice/users/src/utils/crypto_utils"
-	"multi-lang-microservice/users/src/utils/data_utils"
-	"multi-lang-microservice/users/src/utils/errors"
+	"github.com/rampo0/multi-lang-microservice/users/src/domain/users"
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/crypto_utils"
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/data_utils"
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/errors"
 )
 
 var (

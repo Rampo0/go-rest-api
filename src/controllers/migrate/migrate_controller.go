@@ -1,10 +1,10 @@
 package migrate
 
 import (
-	"multi-lang-microservice/users/src/datasources/mysql/users_db/migrations"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rampo0/multi-lang-microservice/users/src/datasources/mysql/users_db/migrations"
 )
 
 func Migrate(c *gin.Context) {

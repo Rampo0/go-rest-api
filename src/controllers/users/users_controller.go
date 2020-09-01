@@ -2,13 +2,13 @@ package users
 
 import (
 	"fmt"
-	"multi-lang-microservice/users/src/domain/users"
-	"multi-lang-microservice/users/src/services"
-	"multi-lang-microservice/users/src/utils/errors"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rampo0/multi-lang-microservice/users/src/domain/users"
+	"github.com/rampo0/multi-lang-microservice/users/src/services"
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/errors"
 )
 
 func getUserId(userIdParam string) (int64, *errors.RestErr) {

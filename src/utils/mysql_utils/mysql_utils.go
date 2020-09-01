@@ -3,11 +3,11 @@ package mysql_utils
 import (
 	"fmt"
 	"log"
-	"multi-lang-microservice/users/src/datasources/mysql/users_db"
-	"multi-lang-microservice/users/src/utils/errors"
 	"strings"
 
 	"github.com/go-sql-driver/mysql"
+	"github.com/rampo0/multi-lang-microservice/users/src/datasources/mysql/users_db"
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/errors"
 )
 
 const (

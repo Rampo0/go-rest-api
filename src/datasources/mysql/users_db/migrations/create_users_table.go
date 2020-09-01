@@ -2,7 +2,8 @@ package migrations
 
 import (
 	"fmt"
-	"multi-lang-microservice/users/src/utils/mysql_utils"
+
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/mysql_utils"
 )
 
 func User() {

@@ -1,6 +1,6 @@
-FROM golang:latest
+FROM golang:1.13.5
 
-WORKDIR /go/src/multi-lang-microservice/users
+WORKDIR /go/src/github.com/rampo0/multi-lang-microservice/users
 
 COPY . .
 
@@ -13,6 +13,6 @@ RUN go install -v ./src/...
 
 # Live reload
 
-WORKDIR /go/src/multi-lang-microservice/users/src
+WORKDIR /go/src/github.com/rampo0/multi-lang-microservice/users/src
 
 CMD ["gin", "--all", "-i", "run", "main.go"]

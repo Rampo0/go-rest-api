@@ -2,10 +2,11 @@ package users
 
 import (
 	"fmt"
-	"multi-lang-microservice/users/src/datasources/mysql/users_db"
-	"multi-lang-microservice/users/src/logger"
-	"multi-lang-microservice/users/src/utils/errors"
-	"multi-lang-microservice/users/src/utils/mysql_utils"
+
+	"github.com/rampo0/multi-lang-microservice/users/src/datasources/mysql/users_db"
+	"github.com/rampo0/multi-lang-microservice/users/src/logger"
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/errors"
+	"github.com/rampo0/multi-lang-microservice/users/src/utils/mysql_utils"
 )
 
 const (

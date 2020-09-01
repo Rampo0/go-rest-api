@@ -1,9 +1,8 @@
 package app
 
 import (
-	"multi-lang-microservice/users/src/logger"
-
 	"github.com/gin-gonic/gin"
+	"github.com/rampo0/multi-lang-microservice/users/src/logger"
 )
 
 var (
