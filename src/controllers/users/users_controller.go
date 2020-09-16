@@ -6,15 +6,15 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rampo0/go-utils/rest_error"
 	"github.com/rampo0/multi-lang-microservice/users/src/domain/users"
 	"github.com/rampo0/multi-lang-microservice/users/src/services"
-	"github.com/rampo0/multi-lang-microservice/users/src/utils/errors"
 )
 
-func getUserId(userIdParam string) (int64, *errors.RestErr) {
+func getUserId(userIdParam string) (int64, *rest_error.RestErr) {
 	userId, userErr := strconv.ParseInt(userIdParam, 10, 64)
 	if userErr != nil {
-		return 0, errors.NewBadRequestError("user id should be a number")
+		return 0, rest_error.NewBadRequestError("user id should be a number")
 	}
 	return userId, nil
 }
@@ -26,7 +26,7 @@ func Create(c *gin.Context) {
 	if err := c.ShouldBindJSON(&user); err != nil {
 		fmt.Println(err)
 
-		restErr := errors.NewBadRequestError("Invalid json body")
+		restErr := rest_error.NewBadRequestError("Invalid json body")
 		c.JSON(restErr.Status, restErr)
 		return
 	}
@@ -69,7 +69,7 @@ func Update(c *gin.Context) {
 	if err := c.ShouldBindJSON(&user); err != nil {
 		fmt.Println(err)
 
-		restErr := errors.NewBadRequestError("Invalid json body")
+		restErr := rest_error.NewBadRequestError("Invalid json body")
 		c.JSON(restErr.Status, restErr)
 		return
 	}
@@ -110,4 +110,22 @@ func Search(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, users.Marshall(c.GetHeader("X-Public") == "true"))
+}
+
+func Login(c *gin.Context) {
+
+	var request users.LoginRequest
+	if err := c.ShouldBindJSON(&request); err != nil {
+		restErr := rest_error.NewBadRequestError("Invalid json body")
+		c.JSON(restErr.Status, restErr)
+		return
+	}
+
+	user, err := services.UsersService.Login(request)
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-Public") == "true"))
 }

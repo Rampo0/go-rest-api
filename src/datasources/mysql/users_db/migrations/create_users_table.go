@@ -2,8 +2,9 @@ package migrations
 
 import (
 	"fmt"
+	"log"
 
-	"github.com/rampo0/multi-lang-microservice/users/src/utils/mysql_utils"
+	"github.com/rampo0/multi-lang-microservice/users/src/datasources/mysql/users_db"
 )
 
 func User() {
@@ -11,7 +12,7 @@ func User() {
 
 	qcheck := "DROP TABLE IF EXISTS %s"
 	// exec query
-	mysql_utils.ExecQuery(fmt.Sprintf(qcheck, tableName))
+	execQuery(fmt.Sprintf(qcheck, tableName))
 
 	query := "CREATE TABLE %s (%s, %s, %s, %s, %s, %s, %s)"
 
@@ -26,5 +27,17 @@ func User() {
 		"password varchar(100)",
 	}
 
-	mysql_utils.ExecQuery(fmt.Sprintf(query, values...))
+	execQuery(fmt.Sprintf(query, values...))
+}
+
+func execQuery(query string) {
+	res, err := users_db.Client.Exec(query)
+
+	if err != nil {
+		log.Fatalf("Error executing query : %v", err)
+	}
+
+	if res != nil {
+		fmt.Println("Query executed successfully")
+	}
 }

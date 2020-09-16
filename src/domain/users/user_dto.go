@@ -3,7 +3,7 @@ package users
 import (
 	"strings"
 
-	"github.com/rampo0/multi-lang-microservice/users/src/utils/errors"
+	"github.com/rampo0/go-utils/rest_error"
 )
 
 const (
@@ -22,19 +22,19 @@ type User struct {
 
 type Users []User
 
-func (user *User) Validate() *errors.RestErr {
+func (user *User) Validate() *rest_error.RestErr {
 
 	user.FirstName = strings.TrimSpace(user.FirstName)
 	user.LastName = strings.TrimSpace(user.LastName)
 
 	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
 	if user.Email == "" {
-		return errors.NewBadRequestError("invalid email address")
+		return rest_error.NewBadRequestError("invalid email address")
 	}
 
 	user.Password = strings.TrimSpace(user.Password)
 	if user.Password == "" {
-		return errors.NewBadRequestError("invalid password")
+		return rest_error.NewBadRequestError("invalid password")
 	}
 	return nil
 }
